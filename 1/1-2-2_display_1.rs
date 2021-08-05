@@ -1,24 +1,20 @@
+
 #![allow(unused)]
-​
-//#[derive(Debug)]
-struct Deep(Structure);
-​
 fn main() {
-    println!("{}",Structure(28));
-    println!("Now {} will print!", Deep(Structure(7)));
-    
-}
-​
 // Import (via `use`) the `fmt` module to make it available.
 // （`use`を使用し、）`fmt`モジュールをインポートします。
 use std::fmt;
-​
+
+
+println!("{}",Structure(28));
+println!("Now {} will print!", Deep(Structure(7)));
+
 // Define a structure for which `fmt::Display` will be implemented. This is
 // a tuple struct named `Structure` that contains an `i32`.
 // `fmt::Display`を実装するための構造体を定義します。
 // これは`Structure`という名前に紐付けられた、`i32`を含むタプルです。
 struct Structure(i32);
-​
+
 // To use the `{}` marker, the trait `fmt::Display` must be implemented
 // manually for the type.
 // `{}` というマーカーを使用するためには、
@@ -38,7 +34,10 @@ impl fmt::Display for Structure {
         write!(f, "{}", self.0)
     }
 }
-​
+
+//#[derive(Debug)]
+struct Deep(Structure);
+
 impl fmt::Display for Deep {
     // This trait requires `fmt` with this exact signature.
     // このトレイトは`fmt`が想定通りのシグネチャであることを要求します。
@@ -53,4 +52,5 @@ impl fmt::Display for Deep {
         // `write!`は`println!`に非常によく似た文法を使用していることに注目。
         write!(f, "{}", self.0)
     }
+}
 }
