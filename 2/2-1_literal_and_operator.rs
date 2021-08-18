@@ -2,10 +2,13 @@ fn main() {
     // Integer addition
     // 整数の足し算
     println!("1 + 2 = {}", 1u32 + 2);
+    println!("1 + 2 = {}", 1u32 + 2i32); // コンパイルエラー！ 4行目は型推論によって 1u32 + 2u32 と同義だということがわかった。
 
     // Integer subtraction
     // 整数の引き算
     println!("1 - 2 = {}", 1i32 - 2);
+    println!("1 - 2 = {}", 1u32 - 2); // コンパイルエラー！ オーバーフローするかどうかをコンパイル時にチェックしてくれるらしい
+    println!("1 - 2 = {}", 1u32 - 1); // これは通る。賢い
     // TODO ^ Try changing `1i32` to `1u32` to see why the type is important
     // TODO ^ 型が重要であることを実感するため`1i32`を`1u32`に変更してみましょう。
 
@@ -26,4 +29,6 @@ fn main() {
     // Use underscores to improve readability!
     // 可読性のための`_`（アンダースコア）の使用
     println!("One million is written as {}", 1_000_000u32);
+    println!("One million is written as {}", 1_0_0_0_0_0_0u32); // こんなことや
+    println!("One million is written as {}", 1___000_000u32);   // こんなこともできる （出力は3行とも1000000）
 }
