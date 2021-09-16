@@ -15,6 +15,7 @@ struct Pair(i32, f32);
 
 // A struct with two fields
 // 2つのフィールドを持つ（クラシックな）構造体
+#[derive(Debug)]
 struct Point {
     x: f32,
     y: f32,
@@ -22,13 +23,26 @@ struct Point {
 
 // Structs can be reused as fields of another struct
 // 構造体は他の構造体のフィールドになることができる
-#[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     // A rectangle can be specified by where the top left and bottom right
     // corners are in space.
     top_left: Point,
     bottom_right: Point,
 }
+
+fn rect_area(rectangle: Rectangle) {
+    let Rectangle{top_left: Point{x: x1, y: y1}, bottom_right: Point{x: x2, y: y2}} = rectangle;
+    println!("Total: {}", ((x2 - x1) * (y2 - y1)).abs());
+}
+
+fn square(point: Point, len: f32) -> Rectangle {
+    Rectangle {
+        top_left: Point { x: point.x, y: point.y + len },
+        bottom_right: Point { x: point.x + len, y: point.y }
+    }
+}
+
 
 fn main() {
     // Create struct with field init shorthand
@@ -87,4 +101,11 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
+
+    // 演習1: Rectangle の面積を計算する rect_area 関数を追加してください。ネストしたデストラクトを使ってみましょう。
+    rect_area(_rectangle);
+    
+    // 演習2: Point と f32 を引数とした時に Rectangle を返す square 関数を追加してください。 Rectangle の左下の点が Point になり、f32 が Rectangle の幅と高さになります。
+    print!("{:?}", square(Point{x: 1.0, y: 1.0}, 1.0));
+
 }
