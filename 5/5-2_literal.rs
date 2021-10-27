@@ -18,11 +18,11 @@ fn main() {
 
   // f32で明示的に指定したものはf64には代入できない。明示してない場合は変更される。
   let f3a = 2.0;
-  let f4:f64 = f3a;
+  let _f4:f64 = f3a;
 
   // intoでも変換できる。通常intoを使って型の整合性を取る。
-  let f5:f64 = f3.into();
-  let f6:f64 = i.into();
+  let _f5:f64 = f3.into();
+  let _f6:f64 = i.into();
 
   // `size_of_val` returns the size of a variable in bytes
   // `size_of_val` 関数は変数のサイズをバイトで返す。
