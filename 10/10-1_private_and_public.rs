@@ -64,11 +64,34 @@ mod my_mod {
         println!("called `my_mod::public_function_in_crate()`");
     }
 
+    // pub(crate) makes functions visible only within the current crate
+    pub fn public_call_restricted() {
+        private_nested::restricted_function();
+        println!("called `private_nested::public_call_restricted()`");
+    }
+
+    // // pub(crate) makes functions visible only within the current crate
+    // pub fn public_call_private_nested_private() {
+    //     private_nested::private_function();
+    //     println!("called `private_nested::private_function()`");
+    // }
+
+    // pub(crate) makes functions visible only within the current crate
+    pub fn public_call_private_nested_function() {
+        private_nested::function();
+        println!("called `private_nested::function()`");
+    }
+
     // Nested modules follow the same rules for visibility
     // ネストしたモジュールも、同様の性質を示す。
     mod private_nested {
         #[allow(dead_code)]
         pub fn function() {
+            println!("called `my_mod::private_nested::function()`");
+        }
+
+        #[allow(dead_code)]
+        fn private_function() {
             println!("called `my_mod::private_nested::function()`");
         }
 
@@ -133,4 +156,9 @@ fn main() {
     // Error! `private_nested` is a private module
     //my_mod::private_nested::restricted_function();
     // TODO ^ Try uncommenting this line
+    
+    my_mod::public_call_restricted();
+    //my_mod::public_call_private_nested_private();
+    my_mod::public_call_private_nested_function();
+    //
 }
