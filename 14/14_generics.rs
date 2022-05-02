@@ -33,8 +33,8 @@ fn main() {
     // `_char`という名の変数を生成する。これは`SingleGen<char>`
     // という型で、値は`SingleGen('a')`となる。ここでは、`SingleGen`には明示的な型パラメータ
     // が与えられている。
-    let _char: SingleGen<char> = SingleGen('a')
-    println!("{:?}", _char);;
+    let _char: SingleGen<char> = SingleGen('a');
+    println!("{:?}", _char);
 
     // `SingleGen` can also have a type parameter implicitly specified:
     // `SingleGen`型の変数には明示的に型パラメータを与えなくてもよい。
