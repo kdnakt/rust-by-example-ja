@@ -12,6 +12,10 @@ fn coerce_static<'a>(_: PhantomData<&'a i32>) -> &'a i32 {
     &NUM
 }
 
+fn coerce_static2(_: &i32) -> &i32 {
+    &NUM
+}
+
 fn main() {
     {
         // Make a `string` literal and print it:
@@ -36,6 +40,10 @@ fn main() {
         let coerced_static = coerce_static(lifetime_phantom);
 
         println!("coerced_static: {}", coerced_static);
+
+        let lifetime_num = 9;
+        let coerced_static2 = coerce_static2(&lifetime_num);
+        println!("coerced_static2: {}", coerced_static2);
     }
 
     println!("NUM: {} stays accessible!", NUM);
