@@ -1,6 +1,7 @@
 use std::thread;
 
-const NTHREADS: u32 = 10;
+const NCHUNKS: usize = 3;
+
 // This is the `main` thread
 fn main() {
 
@@ -31,12 +32,18 @@ fn main() {
     // each chunk will be a reference (&str) into the actual data
     let chunked_data = data.split_whitespace();
 
+    let mut limited_chunks = vec![String::new(); NCHUNKS];// N個の箱のある配列
+    // chunked_dataを順番に読み込んで、i % Nの番号の箱の文字列にくっつけていく
+    for (i, data_segment) in chunked_data.enumerate() {
+        limited_chunks[i % NCHUNKS].push_str(data_segment);
+    }
+
     // Iterate over the data segments.
     // .enumerate() adds the current loop index to whatever is iterated
     // the resulting tuple "(index, element)" is then immediately
     // "destructured" into two variables, "i" and "data_segment" with a
     // "destructuring assignment"
-    for (i, data_segment) in chunked_data.enumerate() {
+    for (i, data_segment) in limited_chunks.into_iter().enumerate() {
         println!("data segment {} is \"{}\"", i, data_segment);
 
         // Process each data segment in a separate thread
