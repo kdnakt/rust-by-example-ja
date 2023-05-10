@@ -1,0 +1,4 @@
+# standard crate data is left out
+# 本節の内容に関係のない行は省略しています。
+[dev-dependencies]
+pretty_assertions = "1"
